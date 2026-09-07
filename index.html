@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>6 HANDS COMBO @ Santa Monica KW</title>
+<meta name="description" content="The 6 Hands Combo at Santa Monica Salon, Kuwait. Face, nails and feet done at once by three specialists. 25 KD, or membership 35 KD/month.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#000;
+    --white:#fff;
+    --smoke:rgba(255,255,255,.62);
+    --line:rgba(255,255,255,.24);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--black);
+    color:var(--white);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .hero{position:fixed;inset:0;overflow:hidden}
+  .hero video{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1.4s ease;
+  }
+  .hero video.on{opacity:1}
+  .veil{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.66) 0%, rgba(0,0,0,.10) 32%, rgba(0,0,0,.14) 52%, rgba(0,0,0,.88) 100%);
+    pointer-events:none;
+  }
+
+  .ui{
+    position:fixed;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:space-between;
+    text-align:center;
+    padding:calc(env(safe-area-inset-top) + 22px) 22px calc(env(safe-area-inset-bottom) + 20px);
+  }
+
+  .top{display:flex;flex-direction:column;align-items:center;gap:10px;animation:fade 1s .15s ease both}
+  .top img{width:54px;height:auto}
+  .top h1{
+    font-family:'Marcellus',serif;
+    font-weight:400;font-size:.92rem;
+    letter-spacing:.46em;text-indent:.46em;
+    text-transform:uppercase;
+  }
+
+  .foot{width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px;animation:fade 1s .45s ease both;margin-bottom:46px}
+  .service{
+    font-family:'Marcellus',serif;
+    font-size:clamp(1.7rem,8vw,2.3rem);
+    font-weight:400;line-height:1.1;
+    text-transform:uppercase;
+  }
+  .service .at{
+    display:block;
+    font-size:.44em;
+    text-transform:none;
+    letter-spacing:.06em;
+    margin-top:2px;
+  }
+  .service-sub{
+    font-size:.72rem;font-weight:300;
+    letter-spacing:.3em;text-indent:.3em;
+    text-transform:uppercase;color:var(--smoke);
+    margin-bottom:8px;
+  }
+
+  .opt{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;
+    padding:17px 20px;
+    text-decoration:none;
+    transition:transform .15s ease, opacity .2s ease;
+  }
+  .opt:active{transform:scale(.98)}
+  .opt:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+  .opt .l{text-align:start}
+  .opt .name{font-size:.94rem;font-weight:600;letter-spacing:.04em}
+  .opt .note{font-size:.72rem;font-weight:300;margin-top:2px}
+  .opt .price{font-family:'Marcellus',serif;font-size:1.5rem;white-space:nowrap}
+  .opt .price small{font-size:.6em;font-family:'Manrope',sans-serif;font-weight:400}
+
+  .opt.single{
+    border:1px solid var(--line);
+    color:var(--white);
+    background:rgba(0,0,0,.3);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+  .opt.single .note{color:var(--smoke)}
+
+  .opt.pack{
+    background:var(--white);
+    color:var(--black);
+    position:relative;
+  }
+  .opt.pack .note{color:rgba(0,0,0,.6)}
+  .save{
+    position:absolute;
+    top:-11px;inset-inline-end:14px;
+    background:var(--black);
+    color:var(--white);
+    border:1px solid var(--white);
+    font-size:.6rem;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    padding:4px 10px;border-radius:100px;
+  }
+
+  .wa{
+    position:fixed;
+    right:16px;
+    bottom:calc(env(safe-area-inset-bottom) + 16px);
+    display:flex;align-items:center;gap:8px;
+    padding:10px 15px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:100px;
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:var(--white);
+    text-decoration:none;
+    font-size:.64rem;font-weight:400;
+    letter-spacing:.16em;text-transform:uppercase;
+    z-index:5;
+    animation:fade 1s .8s ease both;
+  }
+  .wa:active{opacity:.8}
+  .wa svg{width:14px;height:14px;flex:none}
+
+  .cities{
+    margin-top:4px;
+    font-size:.6rem;font-weight:300;
+    letter-spacing:.44em;text-indent:.44em;
+    text-transform:uppercase;color:var(--smoke);
+  }
+
+  .lang{
+    position:fixed;
+    left:16px;
+    top:calc(env(safe-area-inset-top) + 16px);
+    z-index:6;
+    animation:fade 1s .8s ease both;
+  }
+  .lang-btn{
+    display:flex;align-items:center;gap:7px;
+    padding:9px 14px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:100px;
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:var(--white);
+    font-family:'Manrope','Tajawal',sans-serif;
+    font-size:.74rem;font-weight:500;
+    cursor:pointer;
+  }
+  .lang-btn:active{opacity:.8}
+  .lang-btn .chev{font-size:.55rem;opacity:.7;transition:transform .2s ease}
+  .lang.open .lang-btn .chev{transform:rotate(180deg)}
+  .lang-menu{
+    position:absolute;left:0;top:calc(100% + 8px);
+    min-width:100%;
+    display:none;flex-direction:column;
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:14px;overflow:hidden;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+  .lang.open .lang-menu{display:flex}
+  .lang-menu button{
+    padding:11px 16px;
+    background:none;border:none;
+    color:var(--white);
+    font-family:'Manrope','Tajawal',sans-serif;
+    font-size:.8rem;font-weight:500;
+    text-align:start;cursor:pointer;white-space:nowrap;
+  }
+  .lang-menu button:hover,.lang-menu button:focus-visible{background:rgba(255,255,255,.12)}
+  .lang-menu button[aria-selected="true"]{opacity:.55}
+
+  /* Arabic typography & direction fixes */
+  html[lang="ar"] body{font-family:'Tajawal',sans-serif}
+  html[lang="ar"] .top h1,
+  html[lang="ar"] .service,
+  html[lang="ar"] .price{font-family:'Tajawal',sans-serif;font-weight:500}
+  html[lang="ar"] .top h1,
+  html[lang="ar"] .service-sub,
+  html[lang="ar"] .cities,
+  html[lang="ar"] .save,
+  html[lang="ar"] .wa{letter-spacing:0;text-indent:0}
+
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .top,.foot,.wa{animation:none}
+    .hero video{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero" aria-hidden="true">
+  <video id="heroVid" src="/media/hero.mp4" muted loop playsinline preload="auto"></video>
+  <div class="veil"></div>
+</div>
+
+<div class="lang" id="lang">
+  <button class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false">
+    <span id="langLabel">العربية</span><span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="lang-menu" id="langMenu" role="listbox" aria-label="Language">
+    <button role="option" data-lang="en" lang="en">English</button>
+    <button role="option" data-lang="ar" lang="ar">العربية</button>
+  </div>
+</div>
+
+<main class="ui">
+  <header class="top">
+    <img src="/logo-white.png" alt="Santa Monica rose logo">
+    <h1 data-i18n="title">Santa Monica KW</h1>
+  </header>
+
+  <div class="foot">
+    <div>
+      <p class="service"><span data-i18n="service">6 Hands Combo</span><span class="at" data-i18n="serviceAt">@ Santa Monica</span></p>
+      <p class="service-sub" data-i18n="sub">Face · Nails · Feet — at once</p>
+    </div>
+
+    <a class="opt single" href="https://www.fresha.com" target="_blank" rel="noopener">
+      <span class="l">
+        <span class="name" data-i18n="singleName">Single Combo</span><br>
+        <span class="note" data-i18n="singleNote">One hour · three specialists</span>
+      </span>
+      <span class="price" data-i18n="singlePrice">25 KD</span>
+    </a>
+
+    <a class="opt pack" href="https://www.fresha.com" target="_blank" rel="noopener">
+      <span class="save" data-i18n="save">Best Value</span>
+      <span class="l">
+        <span class="name" data-i18n="packName">Monthly Membership</span><br>
+        <span class="note" data-i18n="packNote">Combo free · 2 manicures · 1 pedicure · 15% off treatments</span>
+      </span>
+      <span class="price"><span data-i18n="packPrice">35 KD</span><small data-i18n="perMonth">/mo</small></span>
+    </a>
+
+    <p class="cities" data-i18n="cities">Kuwait · Dubai</p>
+  </div>
+</main>
+
+<a class="wa" href="https://wa.me/965XXXXXXXX?text=Hi%20Santa%20Monica!" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 004.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.12c-.25.7-1.45 1.33-2 1.38-.51.05-1.16.07-1.87-.12-.43-.14-.99-.32-1.7-.63-2.99-1.29-4.94-4.3-5.09-4.5-.15-.2-1.22-1.62-1.22-3.08 0-1.47.77-2.19 1.04-2.49.27-.3.6-.37.8-.37h.57c.18 0 .43-.07.67.51.25.6.85 2.07.92 2.22.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.4-.45.53-.15.15-.3.31-.13.61.18.3.79 1.3 1.69 2.11 1.16 1.03 2.14 1.35 2.44 1.5.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.74.82 2.04.97.3.15.5.22.57.35.08.13.08.73-.17 1.43z"/></svg>
+  <span data-i18n="wa">Contact us</span>
+</a>
+
+<script>
+(function(){
+  var v = document.getElementById('heroVid');
+  function start(){
+    var p = v.play();
+    if (p && p.catch) p.catch(function(){});
+    v.classList.add('on');
+  }
+  if (v.readyState >= 3) start();
+  else v.addEventListener('canplay', start, {once:true});
+  document.addEventListener('touchstart', function t(){
+    v.play().catch(function(){});
+    document.removeEventListener('touchstart', t);
+  }, {once:true});
+})();
+
+(function(){
+  var I18N = {
+    en: {
+      docTitle: "6 HANDS COMBO @ Santa Monica KW",
+      title: "Santa Monica KW",
+      service: "6 Hands Combo",
+      serviceAt: "@ Santa Monica",
+      sub: "Face · Nails · Feet — at once",
+      singleName: "Single Combo",
+      singleNote: "One hour · three specialists",
+      singlePrice: "25 KD",
+      packName: "Monthly Membership",
+      packNote: "Combo free · 2 manicures · 1 pedicure · 15% off treatments",
+      packPrice: "35 KD",
+      perMonth: "/mo",
+      save: "Best Value",
+      cities: "Kuwait · Dubai",
+      wa: "Contact us"
+    },
+    ar: {
+      docTitle: "كومبو الست أيادي @ سانتا مونيكا الكويت",
+      title: "سانتا مونيكا الكويت",
+      service: "كومبو الست أيادي",
+      serviceAt: "@ سانتا مونيكا",
+      sub: "وجه · أظافر · أقدام — بنفس الوقت",
+      singleName: "جلسة كومبو",
+      singleNote: "ساعة وحدة · ثلاث خبيرات",
+      singlePrice: "٢٥ د.ك",
+      packName: "العضوية الشهرية",
+      packNote: "الكومبو مجانًا · ٢ منيكير · ١ بديكير · خصم ١٥٪ على العلاجات",
+      packPrice: "٣٥ د.ك",
+      perMonth: "/شهريًا",
+      save: "أفضل قيمة",
+      cities: "الكويت · دبي",
+      wa: "تواصلي معنا"
+    }
+  };
+
+  var wrap = document.getElementById('lang');
+  var btn = document.getElementById('langBtn');
+  var label = document.getElementById('langLabel');
+  var menu = document.getElementById('langMenu');
+  var options = menu.querySelectorAll('button[data-lang]');
+
+  function setLang(l){
+    var t = I18N[l] || I18N.en;
+    document.documentElement.lang = l;
+    document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
+    document.title = t.docTitle;
+    var els = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < els.length; i++){
+      var key = els[i].getAttribute('data-i18n');
+      if (t[key] !== undefined) els[i].textContent = t[key];
+    }
+    label.textContent = (l === 'ar') ? 'English' : 'العربية';
+    label.setAttribute('lang', (l === 'ar') ? 'en' : 'ar');
+    for (var j = 0; j < options.length; j++){
+      options[j].setAttribute('aria-selected', options[j].getAttribute('data-lang') === l ? 'true' : 'false');
+    }
+    try { localStorage.setItem('smk-lang', l); } catch(e){}
+  }
+
+  function closeMenu(){
+    wrap.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  for (var k = 0; k < options.length; k++){
+    options[k].addEventListener('click', function(){
+      setLang(this.getAttribute('data-lang'));
+      closeMenu();
+    });
+  }
+  document.addEventListener('click', closeMenu);
+
+  var saved = null;
+  try { saved = localStorage.getItem('smk-lang'); } catch(e){}
+  setLang(saved === 'ar' ? 'ar' : 'en');
+})();
+</script>
+
+</body>
+</html>
